@@ -1,5 +1,11 @@
 def main():
+    n=input('input number')
     def countDigit(number):
-        return
+        number= int(number)
+        if (number // 10 )==0:
+            return 1
+        return 1+ countDigit((number)//10)
 
+
+    print(countDigit(n))
 main()
