@@ -9,7 +9,7 @@ def main():
         if x==1: return 1
         elif x==0: return str
         else:
-            for i in range(1,x+1):
+            for i in range(1,x//2):
                 if (x % i)==0:
                     d.append(i)
         return d 

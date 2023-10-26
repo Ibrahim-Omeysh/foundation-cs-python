@@ -43,7 +43,37 @@ def main():
         else:
             return firstnumber
         
+    #######  insert matrix ######
+    def insertmatrix(x,y):
+        matrix2d=[]
+        for i in range(x):
+            list1=[]
+            for j in range (y):
+                n=input('insert a number: ')
+                list1.append(n)
+            matrix2d.append(list1)    
+        return matrix2d  
+    
+    ##### sum colum #### 
+    def sumColum(matrix,i,j):
+
+        if int(len(matrix))==i:
+            return 0
+        else:
+            return int(matrix[i][j])+ int(sumColum(matrix , i+1,j))
+        
+    #### check if normilize######
+    def checkNurmilize(matrix,i,j):
+        if j==int(len(matrix[0])):
+            return 0
+        if sumColum(matrix,i,j)==0:
+            return  1+  checkNurmilize(matrix,i,j+1)
+        else:
+            return checkNurmilize(matrix,i,j+1)
 
         
 
+
+    m=insertmatrix(3,3) 
+    print(m ,'normilize:',checkNurmilize(m,0,0))
 main()
