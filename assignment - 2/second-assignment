@@ -1,11 +1,49 @@
 def main():
-    n=input('input number')
+    ###### input #######
+    def inputNumber():
+        n=input('please insert a number: ')
+        while (not n.isnumeric()):
+            n=input('please insert a valid input: ')
+        return n 
+    
+    ####### creat list ##########   
+    def creatList():
+        list1=[]
+        # check first value
+        n=input('please insert the lenght of your list: ')
+        while (not n.isnumeric()):
+            n=input('please insert a valid input: ')
+        # check list number validity
+        while (int(len(list1))<int(n) ):
+            num=input('please insert the numbers: ')
+            if  num.isnumeric():
+                list1.append(num)
+            else:
+                print('Warning this is not a valid number')
+        return list1  
+          
+    ####### count digit function ########
     def countDigit(number):
         number= int(number)
         if (number // 10 )==0:
             return 1
         return 1+ countDigit((number)//10)
+    
+    ####### Find max ######
+    def findMax(list1):
 
+        if list1 is None:
+            return 0
+        elif len(list1)==1:
+            return list1[0]
+        firstnumber=list1[0]
+        maxnumber=findMax(list1[1:])
+        if maxnumber is not None: 
+            return firstnumber if int(firstnumber)>int(maxnumber) else maxnumber
+        else:
+            return firstnumber
+        
 
-    print(countDigit(n))
+        
+
 main()
