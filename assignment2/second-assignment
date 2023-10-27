@@ -1,13 +1,12 @@
-def main():
     ###### input #######
-    def inputNumber():
+def inputNumber():
         n=input('please insert a number: ')
         while (not n.isnumeric()):
             n=input('please insert a valid input: ')
         return n 
     
     ####### creat list ##########   
-    def creatList():
+def creatList():
         list1=[]
         # check first value
         n=input('please insert the lenght of your list: ')
@@ -23,14 +22,14 @@ def main():
         return list1  
           
     ####### count digit function ########
-    def countDigit(number):
+def countDigit(number):
         number= int(number)
         if (number // 10 )==0:
             return 1
         return 1+ countDigit((number)//10)
     
     ####### Find max ######
-    def findMax(list1):
+def findMax(list1):
 
         if list1 is None:
             return 0
@@ -44,7 +43,7 @@ def main():
             return firstnumber
         
     #######  insert matrix ######
-    def insertmatrix(x,y):
+def insertmatrix(x,y):
         matrix2d=[]
         for i in range(x):
             list1=[]
@@ -55,7 +54,7 @@ def main():
         return matrix2d  
     
     ##### sum colum #### 
-    def sumColum(matrix,i,j):
+def sumColum(matrix,i,j):
 
         if int(len(matrix))==i:
             return 0
@@ -63,17 +62,38 @@ def main():
             return int(matrix[i][j])+ int(sumColum(matrix , i+1,j))
         
     #### check if normilize######
-    def checkNurmilize(matrix,i,j):
+def checkNurmilize(matrix,i,j):
         if j==int(len(matrix[0])):
             return 0
         if sumColum(matrix,i,j)==0:
             return  1+  checkNurmilize(matrix,i,j+1)
         else:
             return checkNurmilize(matrix,i,j+1)
-
         
+    #### menu ######
+def main():
+    n=0      
+    while n != 4:
+        print('\n1) count digit\n2) Find Max\n3) Count Normalized Columns\n4) Exit')
+        n=input('\nplease choose an option: ')
+        while (not n.isnumeric()):
+            n=input('\nplease insert a valid input: ')
+        n=int(n)      
+        if n==1:
+            count=countDigit(inputNumber())
+            print('this number has ',count,'digit')
+        elif n==2:
+             list1=creatList()
+             print('\nThe max of this list is :', findMax(list1))
+        elif n==3:
+            print('first we need to creat a2d matrix')
+            x=int(inputNumber())
+            y=x
+            matrix=insertmatrix(x,y)
+            print('this matrix:',matrix,'has',checkNurmilize(matrix,0,0),'normilize colum')
+        elif n==4: 
+            exit()
+     
+main()        
 
 
-    m=insertmatrix(3,3) 
-    print(m ,'normilize:',checkNurmilize(m,0,0))
-main()
