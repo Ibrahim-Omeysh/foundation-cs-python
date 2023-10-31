@@ -17,10 +17,8 @@ def findKey(dict1,val):
 ######   calculate average ########
 def dectAverage(dict1,k):
     scores=dict1[k]["scores"]
-    mean=0
-    for i in scores: 
-        mean +=int(scores[i] )
-    return mean/3    
+    return
+    
 
     
     
