@@ -27,7 +27,7 @@ def countDigit(number):
         if (number // 10 )==0:
             return 1
         return 1+ countDigit((number)//10)
-    
+
     ####### Find max ######
 def findMax(list1):
 
