@@ -138,7 +138,8 @@ def studentImprovment(dict1):
         counter=0
         for j in range(3):
             if  list3[j]==list1[i][j]:
-                counter+=1
+                if list3.count(list3[0])!= len(list3):
+                    counter+=1
         if counter==3:
             list2.append(i+1)       
     return list2        
@@ -146,11 +147,11 @@ def studentImprovment(dict1):
 
     
 def main():
-    classroom ={1:{"name" : "ibrahim" ,"age":"21",  "scores":(25,75,95)},
-                2:{"name" : "georgio" ,"age":"40",  "scores":(65,70,95)},
+    classroom ={1:{"name" : "ibrahim" ,"age":"21",  "scores":(25,45,95)},
+                2:{"name" : "georgio" ,"age":"40",  "scores":(70,70,95)},
                 3:{"name" : "ali"     ,"age":"25",  "scores":(25,45,65)},
                 4:{"name" : "ibrahim" ,"age":"19",  "scores":(30,40,20)},
-                5:{"name" : "omar"    ,"age":"20",  "scores":(80,85,90)}
+                5:{"name" : "omar"    ,"age":"20",  "scores":(80,80,80)}
                }
     n=0      
     while n != 8:
@@ -162,8 +163,10 @@ def main():
         ########## Show average ##############
         if n==1:
             list1=studentAverage(classroom)
-            for i in classroom:
-                print('\n',classroom[i]["name"],'has a scores average = ',list1[i-1])
+            i=0
+            for k , v in classroom.items():
+                print(classroom[k].get("name"),'had average score = ',list1[i])
+                i+=1
 
         ######### shouw youngest ###########
         if n==2 :
@@ -181,7 +184,7 @@ def main():
             printClass(classroom)
         ######## remove student #########
         if n==5:
-            removeStudent(classroom)    
+            classroom=removeStudent(classroom)    
             printClass(classroom)
 
         ##### Get Common Students #########
@@ -205,12 +208,6 @@ def main():
             else:
                 print('we found',len(list7),'student')
                 for i in range(len(list7)):
-                    print(classroom[(list7[i])])
-                    
-
-
-
-
-
+                    print(classroom[(list7[i])]["name"],'had a improvment in his score:',classroom[(list7[i])]["scores"])
     
 main()
