@@ -1,3 +1,5 @@
+import requests
+
 ######-----task1: open tab------########## 
    
     ###### First check input url ########
@@ -30,7 +32,8 @@ def openTab(data,title,url):
 #########-------second task : close tab-------###########
 
     ####### checking index #########
-def checkNumericIndex():
+
+def checkNumericIndex():##### cheking input########
     index=input("insert index:")
     if index =="":
         return index
@@ -38,7 +41,7 @@ def checkNumericIndex():
         index=input('please, insert a numeric index: ')
     return index
 
-def checkIndex(data,index):
+def checkIndex(data,index):##### check if index exist in data #####
     c=0
     for key in data:
         if key==int(index):
@@ -59,20 +62,34 @@ def closeTab(data,index):
             
     print(data)
 
+########## ----------- third task : switch tabs -----------####################
+def displayTab(data,index):
+    if index=="":   ####### display the last url###############
+        url_to_display="http://"+data[int(len(data))]["Url"]
+        html_content=requests.get(url_to_display)
+        print(html_content.text)
+    else:
+        c=checkIndex(data,index)
+        if c==1:
+            url_to_display="http://"+data[int(index)]["Url"]
+            html_content=requests.get(url_to_display)
+            print(html_content.text)
+        else:
+            print("index not found , please try again")
 
 
         
 def main():
     open_tabs={1: {'Title': 'microsoft', 'Url': 'www.microsoft.com'},
                2: {'Title': 'git', 'Url': 'www.github.com'},
-               3: {'Title': 'hacker', 'Url': 'www.hackerrank.com'}}
-    title=checkTitle()
-    url=checkUrl()
-    open_tabs=openTab(open_tabs,title,url)
-    print(open_tabs)
+               3: {'Title': 'hacker', 'Url': 'www.python.org'}}
+    # title=checkTitle()
+    # url=checkUrl()
+    # open_tabs=openTab(open_tabs,title,url)
+    # print(open_tabs)
     index=checkNumericIndex()
-
-    closeTab(open_tabs,index)
+    # closeTab(open_tabs,index)
+    displayTab(open_tabs,index)
     
 
 main()
