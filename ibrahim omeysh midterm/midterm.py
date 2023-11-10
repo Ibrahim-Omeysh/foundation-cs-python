@@ -63,7 +63,8 @@ def closeTab(data,index):
     print(data)
 
 ########## ----------- third task : switch tabs -----------####################
-def displayTab(data,index):
+
+def switchTab(data,index):
     if index=="":   ####### display the last url###############
         url_to_display="http://"+data[int(len(data))]["Url"]
         html_content=requests.get(url_to_display)
@@ -77,19 +78,26 @@ def displayTab(data,index):
         else:
             print("index not found , please try again")
 
+####### ----------- fourth task : display all tabs-----------###########
 
-        
+def displayAllTabs(data):
+    for key ,val in data.items():
+            print(val['Title'])
+
+     
 def main():
     open_tabs={1: {'Title': 'microsoft', 'Url': 'www.microsoft.com'},
                2: {'Title': 'git', 'Url': 'www.github.com'},
-               3: {'Title': 'hacker', 'Url': 'www.python.org'}}
-    # title=checkTitle()
-    # url=checkUrl()
-    # open_tabs=openTab(open_tabs,title,url)
-    # print(open_tabs)
-    index=checkNumericIndex()
-    # closeTab(open_tabs,index)
-    displayTab(open_tabs,index)
+               3: {'Title': 'hacker', 'Url': 'www.python.org','Title': 'g', 'Url': 'www.google.com'}
+               }
+    #  title=checkTitle()
+    #  url=checkUrl()
+    #  open_tabs=openTab(open_tabs,title,url)
+    #  print(open_tabs)
+    # index=checkNumericIndex()
+    #  closeTab(open_tabs,index)
+    # switchTab(open_tabs,index)
+    displayAllTabs(open_tabs)
     
 
 main()
