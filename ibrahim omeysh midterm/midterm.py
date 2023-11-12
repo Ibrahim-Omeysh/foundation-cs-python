@@ -41,7 +41,7 @@ def checkNumericIndex():##### cheking input########
         index=input('please, insert a numeric index: ')
     return index
 
-def checkIndex(data,index):##### check if index exist in data #####
+def checkIndexexist(data,index):##### check if index exist in data #####
     index=int(index)
     if index > 0 and index <= len(data):
         return True
@@ -53,7 +53,7 @@ def closeTab(data,index):
     if index =="":
         data.pop(len(data)-1)
     else:
-        c=checkIndex(data,index)
+        c=checkIndexexist(data,index)
         index=int(index)
         if c==True:
              index+=-1
@@ -68,7 +68,7 @@ def switchTab(data,index):
         html_content=requests.get(url_to_display)
         print(html_content.text)
     else:
-        c=checkIndex(data,index)
+        c=checkIndexexist(data,index)
         if c==1:
             url_to_display="http://"+data[int(index)]["Url"]
             html_content=requests.get(url_to_display)
@@ -81,26 +81,26 @@ def switchTab(data,index):
 def displayAllTabs(data):
     for tab in data:
         print("-Title-:",tab["Title"],"-Url-:", tab["Url"])
-        if "nestedtab" in tab:
-            for nestedtab in tab["nestedtab"]:
-                print("       nested tab :  ", "-Title-:",nestedtab["Title"], "-Url-:",nestedtab["Url"],)
+        if "NestedTabs" in tab:
+            for nestedtab in tab["NestedTabs"]:
+                print("       Nested tab :  " , "-Title-:", data[nestedtab]["Title"], "-Url-:",data[nestedtab]["Url"],)
 
 ######### ------------ fifth task: creat nested tabs --------- ############
 
 def creatNestedTabs(data,index,title,url):
-    new_tab={'Title': title, 'Url': url}
+    new_tab={"Title": title, "Url": url}
     lastindex=len(data)-1
     if index=="":
         if len(data[lastindex])==2:
-            data[lastindex]["NestedTab"]=new_tab
+            data[lastindex]["NestedTabs"]=new_tab
         else:
-            data[lastindex]["NestedTab"].append(new_tab)
+            data[lastindex]["NestedTabs"].append(new_tab)
     else:
         index=int(index)-1
         if len(data[index])==2:
-            data[index]["NestedTab"]=new_tab
+            data[index]["NestedTabs"]=new_tab
         else:
-            data[index]["NestedTab"].append(new_tab)
+            data[index]["NestedTabs"].append(new_tab)
     return data
 
 
@@ -108,7 +108,7 @@ def creatNestedTabs(data,index,title,url):
 def main():
     open_tabs=[{'Title': 'microsoft', 'Url': 'www.microsoft.com'},
                 {'Title': 'git', 'Url': 'www.github.com'},
-                {'Title': 'python', 'Url': 'www.python.org',"nestedtab":[{'Title': 'w3school', 'Url': 'www.w3school.com'},{'Title': 'git', 'Url': 'www.github.com'}]},
+                {'Title': 'python', 'Url': 'www.python.org',"NestedTabs":[{'Title': 'w3school', 'Url': 'www.w3school.com'},{'Title': 'git', 'Url': 'www.github.com'}]},
                 {'Title': 'youtube', 'Url': 'www.youtube.com'}]
     title=checkTitle()
     url=checkUrl()
