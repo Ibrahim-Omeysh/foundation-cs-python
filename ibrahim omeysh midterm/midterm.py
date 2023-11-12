@@ -1,6 +1,7 @@
 import requests
 import validators
 import json
+import os
 
 ######-----task1: open tab------########## 
    
@@ -131,18 +132,39 @@ def  readfromfile(filepath):
         jsondata=json.load(readfile)
     print("importing data from file finished")
     return jsondata
+
+########### -------------- check if data empty ----------------#####################
+def checkEmptydata(data):
+    if data is None or data==[]:
+        n=input("there is no tabs opened please choose an option : \n1) Open Tab \n2) import Tabs\n3) Exit ")
+
+        while not n.isnumeric() or int(n)<1 or int(n)>3:
+            n=input("please insert number between 1 and 3 : ")
+        n=int(n)
+
+        ######### -------- option 1: open tab --------#########
+        if n==1:
+            title=checkTitle()
+            url=checkUrl()
+            open_tabs=openTab(open_tabs,title,url)
+            print("tab added successfully :D ")
+            return data
         
+        ######### -------- option 2: import tab --------#########
+        if n==2:
+            filepath = input('Enter a file path: ')
+            while not os.path.exists(filepath):
+                 filepath = input('Enter a correct file path: ')
+            data=readfromfile(filepath)
+            return data
+
+
 ############## --------------- display menu ---------------------###################
 def displayMenu(open_tabs):
     n=0
     while n!=9:
         print('\n1) Open Tab \n2) Close Tab\n3) Switch Tab \n4) Display All Tabs\n5) Open Nested Tab \n6) Clear All Tabs \n7) Save Tabs \n8) Import Tabs \n9) Exit')
-        if open_tabs is None or open_tabs==[]:
-            print('there is no data to implement function on it please choose open tab or exit')
-            while n!=1 or n!=9:
-                n=input("please, make sure you select 1 or 9: ")
-        else:
-            n=input('\n please choose an option: ')
+        n=input('\n please choose an option: ')
 
         #####----- check on input option ---------########
         while not n.isnumeric() or int(n)<1 or int(n)>9:
