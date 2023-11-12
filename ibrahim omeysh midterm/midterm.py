@@ -100,14 +100,14 @@ def main():
                 {'Title': 'git', 'Url': 'www.github.com'},
                 {'Title': 'hacker', 'Url': 'www.python.org',"nestedtab":[{'Title': 'dfgger', 'Url': 'www.dfggdf.com'},{'Title': 'git', 'Url': 'www.github.com'}]},
                 {'Title': 'midgdfcrosoft', 'Url': 'www.dfgdfggf.com'}]
-    #  title=checkTitle()
-    #  url=checkUrl()
-    #  open_tabs=openTab(open_tabs,title,url)
-    #  print(open_tabs)
+    # title=checkTitle()
+    # url=checkUrl()
+    # open_tabs=openTab(open_tabs,title,url)
+    # print(open_tabs)
     # index=checkNumericIndex()
-    #  closeTab(open_tabs,index)
+    #closeTab(open_tabs,index)
     # switchTab(open_tabs,index)
-    displayAllTabs(open_tabs)
+    # displayAllTabs(open_tabs)
     
 
 main()
