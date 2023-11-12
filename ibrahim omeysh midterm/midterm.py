@@ -1,4 +1,5 @@
 import requests
+import validators
 
 ######-----task1: open tab------########## 
    
@@ -8,11 +9,14 @@ def checkUrl():
     valide_url=False
     while not valide_url:
         url=input("insert the url please: ")
-        if (url[0:4]=="www." and url[-4:]==".com"):
+        url="http://"+url
+        validation=validators.url(url)
+        if validation:
             valide_url=True
+            print(url)
             return url
         else:
-            print("url format must start with ' www. ' and End with ' .com ' please try again \n")
+            print("url you entered is not valid or input format is wrong ,please try again \n")
 
     ######### check title ################
 
@@ -112,13 +116,14 @@ def main():
                 {'Title': 'youtube', 'Url': 'www.youtube.com'}]
     title=checkTitle()
     url=checkUrl()
+    
     # open_tabs=openTab(open_tabs,title,url)
     # print(open_tabs)
-    index=checkNumericIndex()
+    #index=checkNumericIndex()
     # closeTab(open_tabs,index)
     # switchTab(open_tabs,index)
     # displayAllTabs(open_tabs)
-    open_tabs=creatNestedTabs(open_tabs,index,title,url)
-    displayAllTabs(open_tabs)
+    #open_tabs=creatNestedTabs(open_tabs,index,title,url)
+    #displayAllTabs(open_tabs)
 
 main()
