@@ -89,33 +89,36 @@ def displayAllTabs(data):
 
 def creatNestedTabs(data,index,title,url):
     new_tab={'Title': title, 'Url': url}
-    lastindex=len(data)
+    lastindex=len(data)-1
     if index=="":
         if len(data[lastindex])==2:
             data[lastindex]["NestedTab"]=new_tab
         else:
             data[lastindex]["NestedTab"].append(new_tab)
     else:
+        index=int(index)-1
         if len(data[index])==2:
-            data[lastindex]["NestedTab"]=new_tab
+            data[index]["NestedTab"]=new_tab
         else:
             data[index]["NestedTab"].append(new_tab)
+    return data
 
 
      
 def main():
     open_tabs=[{'Title': 'microsoft', 'Url': 'www.microsoft.com'},
                 {'Title': 'git', 'Url': 'www.github.com'},
-                {'Title': 'hacker', 'Url': 'www.python.org',"nestedtab":[{'Title': 'dfgger', 'Url': 'www.dfggdf.com'},{'Title': 'git', 'Url': 'www.github.com'}]},
-                {'Title': 'midgdfcrosoft', 'Url': 'www.dfgdfggf.com'}]
-    # title=checkTitle()
-    # url=checkUrl()
+                {'Title': 'python', 'Url': 'www.python.org',"nestedtab":[{'Title': 'w3school', 'Url': 'www.w3school.com'},{'Title': 'git', 'Url': 'www.github.com'}]},
+                {'Title': 'youtube', 'Url': 'www.youtube.com'}]
+    title=checkTitle()
+    url=checkUrl()
     # open_tabs=openTab(open_tabs,title,url)
     # print(open_tabs)
-    # index=checkNumericIndex()
+    index=checkNumericIndex()
     # closeTab(open_tabs,index)
     # switchTab(open_tabs,index)
     # displayAllTabs(open_tabs)
-    
+    open_tabs=creatNestedTabs(open_tabs,index,title,url)
+    displayAllTabs(open_tabs)
 
 main()
