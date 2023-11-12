@@ -98,12 +98,9 @@ def displayAllTabs(data):
 ######### ------------ fifth task: create nested tabs --------- ############
 
 def creatNestedTabs(data,index,title,url):
-    
     new_tab={"Title": title, "Url": url}
     lastindex=len(data)-1
-
     if index=="":###### crating on last index#####
-
         if len(data[lastindex])==2:
              data[lastindex]["NestedTabs"]=[new_tab]
         else:
@@ -240,7 +237,6 @@ def displayMenu(open_tabs):
 
         if n==5: 
             index=checkNumericIndex()
-            index=int(index)-1
             if checkIndexexist(open_tabs,index):
                 title=checkTitle()
                 url=checkUrl()
@@ -264,7 +260,14 @@ def displayMenu(open_tabs):
                 data=readfromfile(filepath)
                 open_tabs.extend(data)
 
-     
+        ######### -------- option 9: exit --------########
+
+        if n==9:
+            print('come back later :D , Good bye')
+            exit()
+
+
+
 def main():
     open_tabs=[{
   "Title": "microsoft",
