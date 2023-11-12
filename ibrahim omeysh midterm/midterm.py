@@ -1,5 +1,6 @@
 import requests
 import validators
+import json
 
 ######-----task1: open tab------########## 
    
@@ -12,18 +13,18 @@ def checkUrl():
         url="http://"+url
         validation=validators.url(url)##### return true if valid url #####
         if validation:
-            valide_url=True
-            print(url)
-            return url
+             valide_url=True
+             print(url)
+             return url
         else:
-            print(" -url you entered is not valid or input format is wrong ,please try again \n -check if url start with (www.) and end with (.com .lb .gov ext....)\n -you don't have to write https:// if you try to ")
+             print(" -url you entered is not valid or input format is wrong ,please try again \n -check if url start with (www.) and end with (.com .lb .gov ext....)\n -you don't have to write https:// if you try to ")
 
     ######### check title ################
 
 def checkTitle():
     title=input("please, insert title:")
     while  not title.isalnum():
-        title=input("please, insert title without special characters:")
+         title=input("please, insert title without special characters:")
     return title
     
     ####### append title and url ###########
@@ -38,12 +39,12 @@ def openTab(data,title,url):
     ####### checking index #########
 
 def checkNumericIndex():##### cheking input########
-    index=input("insert index:")
-    if index =="":
-        return index
-    while not index.isdigit():
-        index=input('please, insert a numeric index: ')
-    return index
+     index=input("insert index:")
+     if index =="":
+         return index
+     while not index.isdigit():
+         index=input('please, insert a numeric index: ')
+     return index
 
 def checkIndexexist(data,index):##### check if index exist in data #####
     index=int(index)
@@ -68,17 +69,17 @@ def closeTab(data,index):
 
 def switchTab(data,index):
     if index=="":   ####### display the last url###############
-        url_to_display="http://"+data[int(len(data))]["Url"]
-        html_content=requests.get(url_to_display)
-        print(html_content.text)
+         url_to_display="http://"+data[int(len(data))]["Url"]
+         html_content=requests.get(url_to_display)
+         print(html_content.text)
     else:
         c=checkIndexexist(data,index)
         if c==1:
-            url_to_display="http://"+data[int(index)]["Url"]
-            html_content=requests.get(url_to_display)
-            print(html_content.text)
+             url_to_display="http://"+data[int(index)]["Url"]
+             html_content=requests.get(url_to_display)
+             print(html_content.text)
         else:
-            print("index not found , please try again")
+             print("index not found , please try again")
 
 ####### ----------- fourth task : display all tabs-----------###########
 
@@ -96,26 +97,30 @@ def creatNestedTabs(data,index,title,url):
     lastindex=len(data)-1
     if index=="":
         if len(data[lastindex])==2:
-            data[lastindex]["NestedTabs"]=[new_tab]
+             data[lastindex]["NestedTabs"]=[new_tab]
         else:
-            data[lastindex]["NestedTabs"].append(new_tab)
+             data[lastindex]["NestedTabs"].append(new_tab)
     else:
         index=int(index)-1
         if len(data[index])==2:
-            data[index]["NestedTabs"]=[new_tab]
+             data[index]["NestedTabs"]=[new_tab]
         else:
-            data[index]["NestedTabs"].append(new_tab)
+             data[index]["NestedTabs"].append(new_tab)
     return data
 
-######## ----------- six task : clear all tabs #########----------------
+######## ----------- six task : clear all tabs ----------------#########
 
 def clearAllTabs(data):
     data.clear()
     print("all opened tabs are closed succefuly")
-    print(data)
     return data
 
+####### --------------- seven task : save tabs ----------################
 
+def saveTabs(data,filepath):
+    jsondata=json.dumps(data,indent=1)
+    with open (filepath ,'w') as filetosave:
+        filetosave.write(jsondata)
      
 def main():
     open_tabs=[{'Title': 'microsoft', 'Url': 'www.microsoft.com'},
@@ -133,6 +138,7 @@ def main():
     #displayAllTabs(open_tabs)
     #open_tabs=creatNestedTabs(open_tabs,index,title,url)
     #displayAllTabs(open_tabs)
-    clearAllTabs(open_tabs)
+    # clearAllTabs(open_tabs)
+    saveTabs(open_tabs,'C:/Users/Barho/OneDrive/Documents/GitHub/foundation-cs-python/ibrahim omeysh midterm/tabsjson.json')
 
 main()
