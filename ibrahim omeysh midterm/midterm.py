@@ -64,7 +64,7 @@ def closeTab(data,index):
         if c==True:
              index+=-1
              del data[index]
-             print("tab at index", index-1,"closed successfully")
+             print("tab at index", index+1,"closed successfully")
     return data
 
 
@@ -133,24 +133,24 @@ def  readfromfile(filepath):
     return jsondata
         
 ############## --------------- display menu ---------------------###################
-def displayMenu():
+def displayMenu(open_tabs):
     n=0
-    print('\n1) Open Tab \n2) Close Tab\n3) Switch Tab \n4)  Display All Tabs\n5) Open Nested Tab \n6) Clear All Tabs \n7) Save Tabs \n8) Import Tabs \n 9) Exit')
-    print('\n please choose an option: ')
-    while not n.isnumeric():
-        n=input("please insert number between 1 and 9 : ")
-        while n!=9:
+    while n!=9:
+        print('\n1) Open Tab \n2) Close Tab\n3) Switch Tab \n4) Display All Tabs\n5) Open Nested Tab \n6) Clear All Tabs \n7) Save Tabs \n8) Import Tabs \n9) Exit')
+        n=input('\n please choose an option: ')
+        while not n.isnumeric() or int(n)<1 or int(n)>9:
+            n=input("please insert number between 1 and 9 : ")
+        n=int(n)
+        if n==1:
+            title=checkTitle()
+            url=checkUrl()
+            open_tabs=openTab(open_tabs,title,url)
+            print(" tab added successfully :D ")
 
-            if n==1:
-                title=checkTitle()
-                url=checkUrl()
-                open_tabs=openTab(open_tabs,title,url)
-                print(" tab added successfully :D ")
-
-            if n==2:
-                index=checkNumericIndex()
-                open_tabs=closeTab(open_tabs,index)
-                
+        if n==2:
+            index=checkNumericIndex()
+            open_tabs=closeTab(open_tabs,index)
+                    
 
 
      
@@ -159,7 +159,7 @@ def main():
                 {'Title': 'git', 'Url': 'www.github.com'},
                 {'Title': 'python', 'Url': 'www.python.org',"NestedTabs":[{'Title': 'w3school', 'Url': 'www.w3school.com'},{'Title': 'git', 'Url': 'www.github.com'}]},
                 {'Title': 'youtube', 'Url': 'www.youtube.com'}]
-    
+    displayMenu(open_tabs)
     # print(open_tabs)
     #index=checkNumericIndex()
     # closeTab(open_tabs,index)
@@ -169,6 +169,6 @@ def main():
     #displayAllTabs(open_tabs)
     # clearAllTabs(open_tabs)
     #saveTabs(open_tabs,'C:/Users/Barho/OneDrive/Documents/GitHub/foundation-cs-python/ibrahim omeysh midterm/tabsjson.json')
-    print(readfromfile('C:/Users/Barho/OneDrive/Documents/GitHub/foundation-cs-python/ibrahim omeysh midterm/tabsjson.json'))
+    # print(readfromfile('C:/Users/Barho/OneDrive/Documents/GitHub/foundation-cs-python/ibrahim omeysh midterm/tabsjson.json'))
 
 main()
