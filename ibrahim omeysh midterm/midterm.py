@@ -228,7 +228,11 @@ def displayMenu(open_tabs):
                 title=checkTitle()
                 url=checkUrl()
                 open_tabs=creatNestedTabs(open_tabs,index,title,url)
-            
+
+        ######### -------- option 6: clear all tabs --------#########        
+        if n==6:
+            open_tabs=clearAllTabs(open_tabs)
+
 
      
 def main():
