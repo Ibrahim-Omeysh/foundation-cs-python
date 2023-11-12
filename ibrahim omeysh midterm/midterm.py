@@ -140,6 +140,7 @@ def saveTabs(data,filepath):
     jsondata=json.dumps(data,indent=1)
     with open (filepath ,'w') as filetosave:
         filetosave.write(jsondata)
+    print("saving into file completed")
 
 ########## ------------ final task :  read from file ---------------##################
 def  readfromfile(filepath):
@@ -233,6 +234,11 @@ def displayMenu(open_tabs):
         if n==6:
             open_tabs=clearAllTabs(open_tabs)
 
+        ######### -------- option 7: save tabs --------######### 
+
+        if n==7:
+            filepath=checkFilePath()
+            saveTabs(open_tabs,filepath)
 
      
 def main():
