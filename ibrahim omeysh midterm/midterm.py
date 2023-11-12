@@ -49,7 +49,15 @@ def checkIndex(data,index):##### check if index exist in data #####
         print("index no found")
 
     ############# close tab ##########
-
+def closeTab(data,index):
+    if index =="":
+        data.pop(len(data)-1)
+    else:
+        c=checkIndex(data,index)
+        index=int(index)
+        if c==True:
+             index+=-1
+             del data[index]
 
 
 ########## ----------- third task : switch tabs -----------####################
