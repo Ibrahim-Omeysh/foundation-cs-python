@@ -83,22 +83,22 @@ def displayAllTabs(data):
         print("-Title-:",tab["Title"],"-Url-:", tab["Url"])
         if "NestedTabs" in tab:
             for nestedtab in tab["NestedTabs"]:
-                print("       Nested tab :  " , "-Title-:", data[nestedtab]["Title"], "-Url-:",data[nestedtab]["Url"],)
+                print("       Nested tab :  " , "-Title-:", nestedtab['Title'], "-Url-:",nestedtab['Url'])
 
-######### ------------ fifth task: creat nested tabs --------- ############
+######### ------------ fifth task: create nested tabs --------- ############
 
 def creatNestedTabs(data,index,title,url):
     new_tab={"Title": title, "Url": url}
     lastindex=len(data)-1
     if index=="":
         if len(data[lastindex])==2:
-            data[lastindex]["NestedTabs"]=new_tab
+            data[lastindex]["NestedTabs"]=[new_tab]
         else:
             data[lastindex]["NestedTabs"].append(new_tab)
     else:
         index=int(index)-1
         if len(data[index])==2:
-            data[index]["NestedTabs"]=new_tab
+            data[index]["NestedTabs"]=[new_tab]
         else:
             data[index]["NestedTabs"].append(new_tab)
     return data
