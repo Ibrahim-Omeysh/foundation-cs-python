@@ -97,19 +97,25 @@ def displayAllTabs(data):
 ######### ------------ fifth task: create nested tabs --------- ############
 
 def creatNestedTabs(data,index,title,url):
+    
     new_tab={"Title": title, "Url": url}
     lastindex=len(data)-1
-    if index=="":
+
+    if index=="":###### crating on last index#####
+
         if len(data[lastindex])==2:
              data[lastindex]["NestedTabs"]=[new_tab]
         else:
              data[lastindex]["NestedTabs"].append(new_tab)
-    else:
+        print("Nested tab on index" , lastindex+1 ,"created successfully ")
+
+    else:   ########## creating on sepecified index #############
         index=int(index)-1
         if len(data[index])==2:
-             data[index]["NestedTabs"]=[new_tab]
+            data[index]["NestedTabs"]=[new_tab]
         else:
-             data[index]["NestedTabs"].append(new_tab)
+            data[index]["NestedTabs"].append(new_tab)
+            print("Nested tab on index" , index+1 ,"created successfully ")   
     return data
 
 ######## ----------- six task : clear all tabs ----------------#########
@@ -145,7 +151,7 @@ def  readfromfile(filepath):
 ########### -------------- check if data empty ----------------#####################
 def checkEmptydata(data):
     if data is None or data==[]:
-        n=input("there is no tabs opened please choose an option : \n1) Open Tab \n2) import Tabs\n3) Exit ")
+        n=input("there is no tabs opened please choose an option : \n1) Open Tab \n2) import Tabs\n3) Exit\noption:  ")
 
         while not n.isnumeric() or int(n)<1 or int(n)>3:
             n=input("please insert number between 1 and 3 : ")
@@ -215,7 +221,14 @@ def displayMenu(open_tabs):
 
         ######### -------- option 5: open nested tab --------#########
 
-        
+        if n==5: 
+            index=checkNumericIndex()
+            index=int(index)-1
+            if checkIndexexist(open_tabs,index):
+                title=checkTitle()
+                url=checkUrl()
+                open_tabs=creatNestedTabs(open_tabs,index,title,url)
+            
 
      
 def main():
