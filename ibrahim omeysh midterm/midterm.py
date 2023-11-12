@@ -87,12 +87,19 @@ def displayAllTabs(data):
             for nestedtab in tab["nestedtab"]:
                 print("       nested tab :  ", "-Title-:",nestedtab["Title"], "-Url-:",nestedtab["Url"],)
 
+######### ------------ fifth task: creat nested tabs --------- ############
+
+def creatNestedTabs(data,index,title,url):
+    new_tab={'Title': title, 'Url': url}
+    data[1]["NestedTab"]=new_tab
+
+
      
 def main():
-    open_tabs={1: {'Title': 'microsoft', 'Url': 'www.microsoft.com'},
-               2: {'Title': 'git', 'Url': 'www.github.com'},
-               3: {'Title': 'hacker', 'Url': 'www.python.org','Title': 'g', 'Url': 'www.google.com'}
-               }
+    open_tabs=[{'Title': 'microsoft', 'Url': 'www.microsoft.com'},
+                {'Title': 'git', 'Url': 'www.github.com'},
+                {'Title': 'hacker', 'Url': 'www.python.org',"nestedtab":[{'Title': 'dfgger', 'Url': 'www.dfggdf.com'},{'Title': 'git', 'Url': 'www.github.com'}]},
+                {'Title': 'midgdfcrosoft', 'Url': 'www.dfgdfggf.com'}]
     #  title=checkTitle()
     #  url=checkUrl()
     #  open_tabs=openTab(open_tabs,title,url)
