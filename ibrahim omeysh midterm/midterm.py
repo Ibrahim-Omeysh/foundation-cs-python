@@ -129,16 +129,27 @@ def  readfromfile(filepath):
     print("importing data from file finished")
     return jsondata
         
+############## --------------- display menu ---------------------###################
+def displayMenu():
+    n=0
+    print('\n1) Open Tab \n2) Close Tab\n3) Switch Tab \n4)  Display All Tabs\n5) Open Nested Tab \n6) Clear All Tabs \n7) Save Tabs \n8) Import Tabs \n 9) Exit')
+    print('\n please choose an option: ')
+    while not n.isnumeric():
+        n=input("please insert number between 1 and 9 : ")
+        while n!=9:
+            if n==1:
+                title=checkTitle()
+                url=checkUrl()
+                open_tabs=openTab(open_tabs,title,url)
+                print(" tab added successfully :D ")
+
      
 def main():
     open_tabs=[{'Title': 'microsoft', 'Url': 'www.microsoft.com'},
                 {'Title': 'git', 'Url': 'www.github.com'},
                 {'Title': 'python', 'Url': 'www.python.org',"NestedTabs":[{'Title': 'w3school', 'Url': 'www.w3school.com'},{'Title': 'git', 'Url': 'www.github.com'}]},
                 {'Title': 'youtube', 'Url': 'www.youtube.com'}]
-    #title=checkTitle()
-    #url=checkUrl()
     
-    # open_tabs=openTab(open_tabs,title,url)
     # print(open_tabs)
     #index=checkNumericIndex()
     # closeTab(open_tabs,index)
