@@ -107,6 +107,14 @@ def creatNestedTabs(data,index,title,url):
             data[index]["NestedTabs"].append(new_tab)
     return data
 
+######## ----------- six task : clear all tabs #########----------------
+
+def clearAllTabs(data):
+    data.clear()
+    print("all opened tabs are closed succefuly")
+    print(data)
+    return data
+
 
      
 def main():
@@ -122,8 +130,9 @@ def main():
     #index=checkNumericIndex()
     # closeTab(open_tabs,index)
     # switchTab(open_tabs,index)
-    displayAllTabs(open_tabs)
+    #displayAllTabs(open_tabs)
     #open_tabs=creatNestedTabs(open_tabs,index,title,url)
     #displayAllTabs(open_tabs)
+    clearAllTabs(open_tabs)
 
 main()
