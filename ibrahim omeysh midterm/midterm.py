@@ -157,12 +157,20 @@ def checkEmptydata(data):
                  filepath = input('Enter a correct file path: ')
             data=readfromfile(filepath)
             return data
+        
+        ######### -------- option 3:  exit --------#########
+        if n==3:
+            exit()
 
+        ######### -------- if data not empty return data --------#########
+    else :
+        return data
 
 ############## --------------- display menu ---------------------###################
 def displayMenu(open_tabs):
     n=0
     while n!=9:
+        open_tabs=checkEmptydata(open_tabs)
         print('\n1) Open Tab \n2) Close Tab\n3) Switch Tab \n4) Display All Tabs\n5) Open Nested Tab \n6) Clear All Tabs \n7) Save Tabs \n8) Import Tabs \n9) Exit')
         n=input('\n please choose an option: ')
 
@@ -194,6 +202,7 @@ def displayMenu(open_tabs):
      
 def main():
     open_tabs=[]
+    open_tabs=checkEmptydata(open_tabs)
     displayMenu(open_tabs)
     # print(open_tabs)
     #index=checkNumericIndex()
