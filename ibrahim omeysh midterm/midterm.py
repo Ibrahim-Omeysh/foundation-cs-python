@@ -121,6 +121,15 @@ def clearAllTabs(data):
 
 ####### --------------- seven task : save tabs to json file ----------################
 
+######### checking file path ##############
+def checkFilePath():
+    filepath = input('Enter a file path: ')
+    while not os.path.exists(filepath):
+        filepath = input('Enter a correct file path: ')
+    return filepath
+
+######## save to file ###############
+    
 def saveTabs(data,filepath):
     jsondata=json.dumps(data,indent=1)
     with open (filepath ,'w') as filetosave:
@@ -152,14 +161,14 @@ def checkEmptydata(data):
         
         ######### -------- option 2: import tab --------#########
         if n==2:
-            filepath = input('Enter a file path: ')
-            while not os.path.exists(filepath):
-                 filepath = input('Enter a correct file path: ')
+            filepath=checkFilePath()
             data=readfromfile(filepath)
+            print("tab data imported successfully :D ")
             return data
         
         ######### -------- option 3:  exit --------#########
         if n==3:
+            print('come back later :D , Good bye')
             exit()
 
         ######### -------- if data not empty return data --------#########
