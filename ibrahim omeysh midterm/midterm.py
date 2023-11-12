@@ -115,12 +115,20 @@ def clearAllTabs(data):
     print("all opened tabs are closed succefuly")
     return data
 
-####### --------------- seven task : save tabs ----------################
+####### --------------- seven task : save tabs to json file ----------################
 
 def saveTabs(data,filepath):
     jsondata=json.dumps(data,indent=1)
     with open (filepath ,'w') as filetosave:
         filetosave.write(jsondata)
+
+########## ------------ final task :  read from file ---------------##################
+def  readfromfile(filepath):
+    with open(filepath,'r') as readfile:
+        jsondata=json.load(readfile)
+    print("importing data from file finished")
+    return jsondata
+        
      
 def main():
     open_tabs=[{'Title': 'microsoft', 'Url': 'www.microsoft.com'},
@@ -139,6 +147,7 @@ def main():
     #open_tabs=creatNestedTabs(open_tabs,index,title,url)
     #displayAllTabs(open_tabs)
     # clearAllTabs(open_tabs)
-    saveTabs(open_tabs,'C:/Users/Barho/OneDrive/Documents/GitHub/foundation-cs-python/ibrahim omeysh midterm/tabsjson.json')
+    #saveTabs(open_tabs,'C:/Users/Barho/OneDrive/Documents/GitHub/foundation-cs-python/ibrahim omeysh midterm/tabsjson.json')
+    print(readfromfile('C:/Users/Barho/OneDrive/Documents/GitHub/foundation-cs-python/ibrahim omeysh midterm/tabsjson.json'))
 
 main()
