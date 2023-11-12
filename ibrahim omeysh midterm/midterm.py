@@ -89,7 +89,17 @@ def displayAllTabs(data):
 
 def creatNestedTabs(data,index,title,url):
     new_tab={'Title': title, 'Url': url}
-    data[1]["NestedTab"]=new_tab
+    lastindex=len(data)
+    if index=="":
+        if len(data[lastindex])==2:
+            data[lastindex]["NestedTab"]=new_tab
+        else:
+            data[lastindex]["NestedTab"].append(new_tab)
+    else:
+        if len(data[index])==2:
+            data[lastindex]["NestedTab"]=new_tab
+        else:
+            data[index]["NestedTab"].append(new_tab)
 
 
      
@@ -103,7 +113,7 @@ def main():
     # open_tabs=openTab(open_tabs,title,url)
     # print(open_tabs)
     # index=checkNumericIndex()
-    #closeTab(open_tabs,index)
+    # closeTab(open_tabs,index)
     # switchTab(open_tabs,index)
     # displayAllTabs(open_tabs)
     
