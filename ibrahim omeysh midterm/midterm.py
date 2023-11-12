@@ -2,6 +2,7 @@ import requests
 import validators
 import json
 import os
+import pathlib
 
 ######-----task1: open tab------########## 
    
@@ -127,12 +128,24 @@ def clearAllTabs(data):
 
 ####### --------------- seven task : save tabs to json file ----------################
 
-######### checking file path ##############
+######### checking file path and file format ##############
+
 def checkFilePath():
+
+    ######-----check file path ----######
     filepath = input('Enter a file path: ')
     while not os.path.exists(filepath):
         filepath = input('Enter a correct file path: ')
     return filepath
+
+    #####------- check file format -----#######
+def checkFileExtension(filepath):
+ 
+    file_extension = pathlib.Path(filepath).suffix
+    if file_extension=='.json':
+        return True
+    else:
+        print("file format is not .json please make sure you input path to json file")
 
 ######## save to file ###############
     
@@ -169,9 +182,12 @@ def checkEmptydata(data):
         ######### -------- option 2: import tab --------#########
         if n==2:
             filepath=checkFilePath()
-            data=readfromfile(filepath)
-            print("tab data imported successfully :D ")
-            return data
+            if checkFileExtension(filepath):
+                data=readfromfile(filepath)
+                print("tab data imported successfully :D ")
+                return data
+            else:
+                return None
         
         ######### -------- option 3:  exit --------#########
         if n==3:
@@ -238,13 +254,15 @@ def displayMenu(open_tabs):
 
         if n==7:
             filepath=checkFilePath()
-            saveTabs(open_tabs,filepath)
+            if checkFileExtension(filepath):
+                saveTabs(open_tabs,filepath)
 
         ######### -------- option 8: import tabs from file --------#########
         if n==8:
             filepath=checkFilePath()
-            data=readfromfile(filepath)
-            open_tabs.extend(data)
+            if checkFileExtension(filepath):
+                data=readfromfile(filepath)
+                open_tabs.extend(data)
 
      
 def main():
@@ -288,3 +306,5 @@ main()
 # https://bobbyhadz.com/blog/python-input-file-path
 
 # https://www.w3schools.com/python/ref_list_extend.asp
+
+# https://www.geeksforgeeks.org/how-to-get-file-extension-in-python/
