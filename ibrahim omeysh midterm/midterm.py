@@ -268,15 +268,23 @@ def main():
  }]
     open_tabs=checkEmptydata(open_tabs)
     displayMenu(open_tabs)
-    # print(open_tabs)
-    #index=checkNumericIndex()
-    # closeTab(open_tabs,index)
-    # switchTab(open_tabs,index)
-    #displayAllTabs(open_tabs)
-    #open_tabs=creatNestedTabs(open_tabs,index,title,url)
-    #displayAllTabs(open_tabs)
-    # clearAllTabs(open_tabs)
-    #saveTabs(open_tabs,'C:/Users/Barho/OneDrive/Documents/GitHub/foundation-cs-python/ibrahim omeysh midterm/tabsjson.json')
-    # print(readfromfile('C:/Users/Barho/OneDrive/Documents/GitHub/foundation-cs-python/ibrahim omeysh midterm/tabsjson.json'))
-
+    # 'C:/Users/Barho/OneDrive/Documents/GitHub/foundation-cs-python/ibrahim omeysh midterm/tabsjson.json'))
 main()
+
+#########--------- reference URL---------#########
+
+# https://www.geeksforgeeks.org/python-requests-tutorial/#making-a-request 
+
+# https://www.askpython.com/python/examples/read-html-from-url
+
+# https://www.geeksforgeeks.org/reading-and-writing-json-to-a-file-in-python/
+
+# https://snyk.io/blog/secure-python-url-validation/
+
+# https://www.codingdeeply.com/python-check-if-url-is-valid/
+
+# https://www.w3schools.com/python/python_lists_remove.asp
+
+# https://bobbyhadz.com/blog/python-input-file-path
+
+# https://www.w3schools.com/python/ref_list_extend.asp
