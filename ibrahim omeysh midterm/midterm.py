@@ -8,7 +8,7 @@ import validators
 def checkUrl():
     valide_url=False
     while not valide_url:
-        url=input("insert the url please: ")
+        url=input("Please insert the url  : ")
         url="http://"+url
         validation=validators.url(url)
         if validation:
@@ -16,13 +16,13 @@ def checkUrl():
             print(url)
             return url
         else:
-            print("url you entered is not valid or input format is wrong ,please try again \n")
+            print(" -url you entered is not valid or input format is wrong ,please try again \n -check if url start with (www.) and end with (.com .lb .gov ext....)\n -you don't have to write https:// if you try to ")
 
     ######### check title ################
 
 def checkTitle():
     title=input("please, insert title:")
-    while  not title.isalpha():
+    while  not title.isalnum():
         title=input("please, insert title without special characters:")
     return title
     
