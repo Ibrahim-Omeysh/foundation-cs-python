@@ -10,7 +10,7 @@ def checkUrl():
     while not valide_url:
         url=input("Please insert the url  : ")
         url="http://"+url
-        validation=validators.url(url)
+        validation=validators.url(url)##### return true if valid url #####
         if validation:
             valide_url=True
             print(url)
@@ -84,10 +84,10 @@ def switchTab(data,index):
 
 def displayAllTabs(data):
     for tab in data:
-        print("-Title-:",tab["Title"],"-Url-:", tab["Url"])
+        print("-Title-:",tab["Title"])
         if "NestedTabs" in tab:
             for nestedtab in tab["NestedTabs"]:
-                print("       Nested tab :  " , "-Title-:", nestedtab['Title'], "-Url-:",nestedtab['Url'])
+                print("       Nested tab : " , "-Title-:", nestedtab['Title'])
 
 ######### ------------ fifth task: create nested tabs --------- ############
 
@@ -114,15 +114,15 @@ def main():
                 {'Title': 'git', 'Url': 'www.github.com'},
                 {'Title': 'python', 'Url': 'www.python.org',"NestedTabs":[{'Title': 'w3school', 'Url': 'www.w3school.com'},{'Title': 'git', 'Url': 'www.github.com'}]},
                 {'Title': 'youtube', 'Url': 'www.youtube.com'}]
-    title=checkTitle()
-    url=checkUrl()
+    #title=checkTitle()
+    #url=checkUrl()
     
     # open_tabs=openTab(open_tabs,title,url)
     # print(open_tabs)
     #index=checkNumericIndex()
     # closeTab(open_tabs,index)
     # switchTab(open_tabs,index)
-    # displayAllTabs(open_tabs)
+    displayAllTabs(open_tabs)
     #open_tabs=creatNestedTabs(open_tabs,index,title,url)
     #displayAllTabs(open_tabs)
 
