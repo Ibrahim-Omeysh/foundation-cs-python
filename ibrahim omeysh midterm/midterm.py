@@ -25,9 +25,9 @@ def checkTitle():
     ####### append title and url ###########
 
 def openTab(data,title,url):
-    index=int(len(data)+1)
-    data[index]={'Title':title,'Url':url}
-    return data
+     new_tab={'Title':title,'Url':url}
+     data.append(new_tab)
+     return data
 
 #########-------second task : close tab-------###########
 
@@ -42,23 +42,23 @@ def checkNumericIndex():##### cheking input########
     return index
 
 def checkIndex(data,index):##### check if index exist in data #####
-    c=0
-    for key in data:
-        if key==int(index):
-            c=1
-    return c
+    index=int(index)
+    if index > 0 and index <= len(data):
+        return True
+    else:
+        print("index no found")
 
     ############# close tab ##########
 
 def closeTab(data,index):
     if index =="":
-        data.popitem()
+        data.pop(len(data)-1)
     else:
         c=checkIndex(data,index)
-        if c==1:
-             data.pop(int(index))
-        else:
-            print("index not found , please try again")
+        index=int(index)
+        if c==True:
+             index+=-1
+             del data[index]
             
     print(data)
 
@@ -81,8 +81,11 @@ def switchTab(data,index):
 ####### ----------- fourth task : display all tabs-----------###########
 
 def displayAllTabs(data):
-    for key ,val in data.items():
-            print(val['Title'])
+    for tab in data:
+        print("-Title-:",tab["Title"],"-Url-:", tab["Url"])
+        if "nestedtab" in tab:
+            for nestedtab in tab["nestedtab"]:
+                print("       nested tab :  ", "-Title-:",nestedtab["Title"], "-Url-:",nestedtab["Url"],)
 
      
 def main():
