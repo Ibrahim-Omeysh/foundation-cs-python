@@ -73,13 +73,13 @@ def closeTab(data,index):
 
 def switchTab(data,index):
     if index=="":   ####### display the last url###############
-         url_to_display="http://"+data[int(len(data))]["Url"]
+         url_to_display="http://"+data[int(len(data)-1)]["Url"]
          html_content=requests.get(url_to_display)
          print(html_content.text)
     else:
         c=checkIndexexist(data,index)
         if c==True:
-             url_to_display="http://"+data[int(index)]["Url"]
+             url_to_display="http://"+data[int(index)-1]["Url"]
              html_content=requests.get(url_to_display)
              print(html_content.text)
         else:
@@ -146,7 +146,7 @@ def saveTabs(data,filepath):
 def  readfromfile(filepath):
     with open(filepath,'r') as readfile:
         jsondata=json.load(readfile)
-    print("importing data from file \n.....\n..........\n...............")
+    print("importing data from file \n.....\n..........\n...............\n\n import finish successfully")
     return jsondata
 
 ########### -------------- check if data empty ----------------#####################
@@ -239,6 +239,12 @@ def displayMenu(open_tabs):
         if n==7:
             filepath=checkFilePath()
             saveTabs(open_tabs,filepath)
+
+        ######### -------- option 8: import tabs from file --------#########
+        if n==8:
+            filepath=checkFilePath()
+            data=readfromfile(filepath)
+            open_tabs.extend(data)
 
      
 def main():
