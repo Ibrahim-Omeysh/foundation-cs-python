@@ -78,7 +78,7 @@ def switchTab(data,index):
          print(html_content.text)
     else:
         c=checkIndexexist(data,index)
-        if c==1:
+        if c==True:
              url_to_display="http://"+data[int(index)]["Url"]
              html_content=requests.get(url_to_display)
              print(html_content.text)
@@ -139,7 +139,7 @@ def saveTabs(data,filepath):
 def  readfromfile(filepath):
     with open(filepath,'r') as readfile:
         jsondata=json.load(readfile)
-    print("importing data from file finished")
+    print("importing data from file \n.....\n..........\n...............")
     return jsondata
 
 ########### -------------- check if data empty ----------------#####################
@@ -155,7 +155,7 @@ def checkEmptydata(data):
         if n==1:
             title=checkTitle()
             url=checkUrl()
-            open_tabs=openTab(open_tabs,title,url)
+            data=openTab(data,title,url)
             print("tab added successfully :D ")
             return data
         
@@ -208,9 +208,35 @@ def displayMenu(open_tabs):
             index=checkNumericIndex()
             switchTab(open_tabs,index)
 
+        ######### -------- option 4: Display All Tabs --------#########
+
+        if n==4:
+            displayAllTabs(open_tabs)
+
+        ######### -------- option 5: open nested tab --------#########
+
+        
+
      
 def main():
-    open_tabs=[]
+    open_tabs=[{
+  "Title": "microsoft",
+  "Url": "www.microsoft.com"
+ },
+ {
+  "Title": "python",
+  "Url": "www.python.org",
+  "NestedTabs": [
+    {
+    "Title": "w3school",
+    "Url": "www.w3school.com"
+    },
+    {
+    "Title": "git",
+    "Url": "www.github.com"
+    }
+  ]
+ }]
     open_tabs=checkEmptydata(open_tabs)
     displayMenu(open_tabs)
     # print(open_tabs)
