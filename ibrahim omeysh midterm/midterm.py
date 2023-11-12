@@ -137,28 +137,41 @@ def displayMenu(open_tabs):
     n=0
     while n!=9:
         print('\n1) Open Tab \n2) Close Tab\n3) Switch Tab \n4) Display All Tabs\n5) Open Nested Tab \n6) Clear All Tabs \n7) Save Tabs \n8) Import Tabs \n9) Exit')
-        n=input('\n please choose an option: ')
+        if open_tabs is None or open_tabs==[]:
+            print('there is no data to implement function on it please choose open tab or exit')
+            while n!=1 or n!=9:
+                n=input("please, make sure you select 1 or 9: ")
+        else:
+            n=input('\n please choose an option: ')
+
+        #####----- check on input option ---------########
         while not n.isnumeric() or int(n)<1 or int(n)>9:
             n=input("please insert number between 1 and 9 : ")
         n=int(n)
+
+        ######### -------- option 1: open tab --------#########
+
         if n==1:
             title=checkTitle()
             url=checkUrl()
             open_tabs=openTab(open_tabs,title,url)
             print(" tab added successfully :D ")
+        
+        ######### -------- option 2: close tab --------#########
 
         if n==2:
             index=checkNumericIndex()
             open_tabs=closeTab(open_tabs,index)
                     
+        ######### -------- option 3: switch tab --------#########
 
+        if n==3:
+            index=checkNumericIndex()
+            switchTab(open_tabs,index)
 
      
 def main():
-    open_tabs=[{'Title': 'microsoft', 'Url': 'www.microsoft.com'},
-                {'Title': 'git', 'Url': 'www.github.com'},
-                {'Title': 'python', 'Url': 'www.python.org',"NestedTabs":[{'Title': 'w3school', 'Url': 'www.w3school.com'},{'Title': 'git', 'Url': 'www.github.com'}]},
-                {'Title': 'youtube', 'Url': 'www.youtube.com'}]
+    open_tabs=[]
     displayMenu(open_tabs)
     # print(open_tabs)
     #index=checkNumericIndex()
