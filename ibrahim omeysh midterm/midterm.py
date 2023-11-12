@@ -57,12 +57,15 @@ def checkIndexexist(data,index):##### check if index exist in data #####
 def closeTab(data,index):
     if index =="":
         data.pop(len(data)-1)
+        print( '\n last tab closed successfully ')
     else:
         c=checkIndexexist(data,index)
         index=int(index)
         if c==True:
              index+=-1
              del data[index]
+             print("tab at index", index-1,"closed successfully")
+    return data
 
 
 ########## ----------- third task : switch tabs -----------####################
@@ -137,11 +140,18 @@ def displayMenu():
     while not n.isnumeric():
         n=input("please insert number between 1 and 9 : ")
         while n!=9:
+
             if n==1:
                 title=checkTitle()
                 url=checkUrl()
                 open_tabs=openTab(open_tabs,title,url)
                 print(" tab added successfully :D ")
+
+            if n==2:
+                index=checkNumericIndex()
+                open_tabs=closeTab(open_tabs,index)
+                
+
 
      
 def main():
