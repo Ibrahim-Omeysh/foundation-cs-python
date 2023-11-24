@@ -14,8 +14,6 @@ class Task:
     ########### setter and getter for fields #############
     
     ############### id #############################
-    def setId(self,id):
-        self.__id=id
     def getId(self):
         return self.__id
     ############### description #############################
@@ -53,6 +51,9 @@ class Queuetask:
         self.__head=None
         self.__size=0
 
+    def getHead(self):
+        return self.__head
+    
     def isEmpty(self):
         return self.__size==0
     
@@ -62,17 +63,17 @@ class Queuetask:
         if self.__size==0:
             self.__head=node_to_add
             self.__size+=1
-            print("task added successfully")
+            print("\n-----task added successfully------\n")
         else:
-            if (node_to_add.getTask().getPriority()> self.__head.getTask().getPriority()):###### the priority is bigger than the priority of first node ########
+            if (node_to_add.getTask().getPriority()> self.__head.getTask().getPriority()):### the priority is bigger than the priority of first node #####
                 node_to_add.next=self.__head
                 self.__head=node_to_add
                 self.__size+=1
-                print("task added successfully")
+                print("\n-----task added successfully------\n")
             else:               ########## if not we had to search for it ###############
                 current=self.__head
                 previous=current
-                while ( current!=None and current.getTask().getPriority() >= node_to_add.getTask().getPriority() ):####### find the node that hade smaller priority ########
+                while ( current!=None and current.getTask().getPriority() >= node_to_add.getTask().getPriority() ):### find the node that hade smaller priority #####
                     previous=current
                     current=current.next
 
@@ -80,7 +81,7 @@ class Queuetask:
                 previous.next=node_to_add
                 node_to_add.next=current
                 self.__size+=1
-                print("task added successfully")
+                print("\n-----task added successfully------\n")
 
     def dequeue(self): ##### pop the first element from the queue #####
         if self.isEmpty():
@@ -135,10 +136,11 @@ class Stack:
 
 ################## Class Task manager#################
 class TaskManager:
-    def __init__(self):######## initial definitio ###############
+    def __init__(self):######## initial definition ###############
         self.__task_queue=Queuetask()
         self.__task_history=Stack()
 
+    ############## set and get functions #############
     def getTaskHistory(self):
         return self.__task_history
     
@@ -151,48 +153,87 @@ class TaskManager:
     def getTaskQueue(self):
         return self.__task_queue
      
-
+    ############ display functions #################
     def displayTaskHistory(self):
         self.__task_history.displayStack()
        
     def displayTaskQueue(self):
         self.__task_queue.displayQueue()
 
+    ######### class finished #########################
 
+############# function for verify input #############
+
+def verifyDescription():##### function for verify description #########
+    description=input("please, insert description:")
+    while not description.isalpha():
+        description=input("please, insert title without special characters:")
+    return description
+
+def verifyPriority():###### function for verify priority ########
+    priority=input("please, insert priority between 1 and 100:")
+    while not priority.isnumeric() or int(priority)<1 or int(priority)>100:
+        priority=input("please, insert priority between 1 and 100:")
+    return priority
+
+def verifyId():###### function for verify id ########
+    id=input("please, insert id:")
+    while not id.isnumeric():
+        id=input("please, insert a positive number:")
+    return id
+
+########### function search task bi id ################
+
+def searchTaskById(id:int,q1:Queuetask):
+    current=q1.getHead()
+    while current!=None:
+        if current.getTask().getId()==id:
+            return current.getTask()
+        else:
+            current=current.next
+    return None
+
+#################### menu #######################################
+def displayMenu():
+
+    q1=Queuetask()
+    tm1=TaskManager()
+    n=0
+    while n!=7:
+        print("1. Add a new task.")
+        print("2. get task by id.")
+        print("3. complete high priority task.")
+        print("4. display all task.")
+        print("5. display uncompleted task.")
+        print("6. display last completed task.")
+        print("7. exit.")
+        print("_______________________________________________________________")
+        n=input('\nplease choose an option: ')
+
+        #####----- check on input option ---------########
+        while not n.isnumeric() or int(n)<1 or int(n)>7:
+            n=input("please insert number between 1 and 7 : ")
+
+        n=int(n)
+        if n==1:########## adding new task to task manager ##############
+            descrption=verifyDescription()
+            priority=verifyPriority()
+            task1=Task(descrption,priority)
+            q1.enqueue(task1)
+            tm1.setTaskQueue(q1)
+            # tm1.getTaskQueue().displayQueue()
+        
+        if n==2:############# find task by id ################
+            id=verifyId()
+            task=searchTaskById(id,q1)
+            if task==None:
+                print("id not found please try again")
+            else:
+                task.printTask()
+            
 
 ################## main ###########################
 
 def main():
-    task1=Task("eating",3)
-    task2=Task("gaming",7)
-    task3=Task("dressing",9)
-    task4=Task("cleaning",1)
-    task1.printTask()
-    task2.printTask()
-    task3.printTask()
-    task4.printTask()
-    print("____________________starting queue_______________________________")
-    tm1=TaskManager()
-    q1=Queuetask()
-    q1.enqueue(task1)
-    q1.enqueue(task2)
-    q1.enqueue(task3)
-    q1.enqueue(task4)
-    tm1.setTaskQueue(q1)
-    tm1.displayTaskQueue()
-    print("____________________finich queue_______________________________")
-    
-    print("______________________starting stack_____________________________")
-    st=Stack()
-    q2=q1.dequeue()
-    st.push(q2)
-    tm1.setTaskHistory(st)
-    tm1.displayTaskHistory()
-    
-    # print("________________________pop 1 item___________________________")
-    # st.pop()
-    # st.displayStack()
-    # print("________________________pop 2 item___________________________")
-    # st.pop()
-    # st.displayStack()
+    displayMenu()
 main()
