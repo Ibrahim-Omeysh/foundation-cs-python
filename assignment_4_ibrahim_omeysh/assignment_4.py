@@ -184,20 +184,22 @@ def verifyId():###### function for verify id ########
 
 ########### function search task bi id ################
 
-def searchTaskById(id:int,q1:Queuetask):
+def searchTaskById(id,q1:Queuetask):
     current=q1.getHead()
     while current!=None:
-        if current.getTask().getId()==id:
-            return current.getTask()
+        if current.getTask().getId()==int(id):
+            return current
         else:
             current=current.next
-    return None
+    return current
 
 #################### menu #######################################
 def displayMenu():
 
     q1=Queuetask()
+    st1=Stack()
     tm1=TaskManager()
+    
     n=0
     while n!=7:
         print("1. Add a new task.")
@@ -221,15 +223,20 @@ def displayMenu():
             task1=Task(descrption,priority)
             q1.enqueue(task1)
             tm1.setTaskQueue(q1)
-            # tm1.getTaskQueue().displayQueue()
-        
+
         if n==2:############# find task by id ################
             id=verifyId()
             task=searchTaskById(id,q1)
             if task==None:
-                print("id not found please try again")
+                print("\nid not found please try again")
             else:
-                task.printTask()
+                task.getTask().printTask()
+        
+        if n==3:######### complete high priority task ##############
+           st1.push(q1.dequeue()) 
+           tm1.setTaskHistory(st1)
+           print("\n Marking the highest priority task as completed and putting it in the task history successfully")
+
             
 
 ################## main ###########################
