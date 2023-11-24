@@ -133,6 +133,35 @@ class Stack:
                 current=current.next
             current.getTask().printTask()
 
+################## Class Task manager#################
+class TaskManager:
+    def __init__(self):######## initial definitio ###############
+        self.__task_queue=Queuetask()
+        self.__task_history=Stack()
+
+    def getTaskHistory(self):
+        return self.__task_history
+    
+    def setTaskHistory(self,newTaskHistory):
+        self.__task_history=newTaskHistory 
+
+    def setTaskQueue(self,newTaskQueue):
+        self.__task_queue=newTaskQueue
+
+    def getTaskQueue(self):
+        return self.__task_queue
+     
+
+    def displayTaskHistory(self):
+        self.__task_history.displayStack()
+       
+    def displayTaskQueue(self):
+        self.__task_queue.displayQueue()
+
+
+
+################## main ###########################
+
 def main():
     task1=Task("eating",3)
     task2=Task("gaming",7)
@@ -142,25 +171,28 @@ def main():
     task2.printTask()
     task3.printTask()
     task4.printTask()
+    print("____________________starting queue_______________________________")
+    tm1=TaskManager()
     q1=Queuetask()
     q1.enqueue(task1)
     q1.enqueue(task2)
     q1.enqueue(task3)
     q1.enqueue(task4)
-    q1.displayQueue()
+    tm1.setTaskQueue(q1)
+    tm1.displayTaskQueue()
     print("____________________finich queue_______________________________")
-    st1=q1.dequeue()
-    st2=q1.dequeue()
-    q1.displayQueue()
+    
     print("______________________starting stack_____________________________")
     st=Stack()
-    st.push(st1)
-    st.push(st2)
-    st.displayStack()
-    print("________________________pop 1 item___________________________")
-    st.pop()
-    st.displayStack()
-    print("________________________pop 2 item___________________________")
-    st.pop()
-    st.displayStack()
+    q2=q1.dequeue()
+    st.push(q2)
+    tm1.setTaskHistory(st)
+    tm1.displayTaskHistory()
+    
+    # print("________________________pop 1 item___________________________")
+    # st.pop()
+    # st.displayStack()
+    # print("________________________pop 2 item___________________________")
+    # st.pop()
+    # st.displayStack()
 main()
