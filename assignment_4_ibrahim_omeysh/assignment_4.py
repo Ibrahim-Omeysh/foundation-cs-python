@@ -53,6 +53,8 @@ class Queuetask:
 
     def getHead(self):
         return self.__head
+    def setHead(self,head):
+        self.__head=head
     
     def isEmpty(self):
         return self.__size==0
@@ -94,18 +96,25 @@ class Queuetask:
             return temp.getTask()
     
     def displayQueue(self):#### displaying tasks #####
-        current=self.__head
-        while (current.next !=None):
-            current.getTask().printTask()
-            current=current.next
-        current.getTask().printTask()
-    
+        if self.__size==0:
+            print("empty queue")
+        else:
+            current=self.__head
+            while current is not None:
+                current.getTask().printTask()
+                current=current.next
+
 ############# class stack####################
     
 class Stack:
     def __init__(self):###### initail definition###########
         self.__head=None
         self.__size=0
+    
+    def getHead(self):
+        return self.__head
+    def setHead(self,head):
+        self.__head=head
     
     def isEmpty(self):##### return if empty #####
         return self.__size==0
@@ -115,24 +124,22 @@ class Stack:
         node_to_add.next=self.__head
         self.__head=node_to_add
         self.__size+=1
-        print("task added successfully to stack")
 
     def pop(self):#### delet node from stack ###########
         temp=self.__head
         self.__head=self.__head.next
         temp.next=None
         self.__size-=1
-        print("task removed successfully from stack")
+        return temp.getTask()
 
     def displayStack(self):###### printing items in stack ########
         if self.__size==0:
             print("empty stack")
         else:
             current=self.__head
-            while current.next != None:
+            while current is not None:
                 current.getTask().printTask()
                 current=current.next
-            current.getTask().printTask()
 
 ################## Class Task manager#################
 class TaskManager:
@@ -182,6 +189,24 @@ def verifyId():###### function for verify id ########
         id=input("please, insert a positive number:")
     return id
 
+################## printAlltask ########################
+
+def printAlltask(tsk:TaskManager):
+    st3=Stack()
+    st3_head=tsk.getTaskHistory().getHead()
+    q=tsk.getTaskQueue()
+    while st3_head!=None:
+        st3.push(st3_head.getTask())
+        st3_head=st3_head.next
+
+    while st3.getHead()!=None or q.getHead()!=None:
+        if st3.getHead() is not None and (q.getHead() is None or st3.getHead().getTask().getPriority() >= q.getHead().getTask().getPriority()):
+            st3.getHead().getTask().printTask()
+            st3.setHead(st3.getHead().next) 
+        elif q.getHead() is not None:
+            q.getHead().getTask().printTask()
+            q.setHead(q.getHead().next)  
+
 ########### function search task bi id ################
 
 def searchTaskById(id,q1:Queuetask):
@@ -223,6 +248,7 @@ def displayMenu():
             task1=Task(descrption,priority)
             q1.enqueue(task1)
             tm1.setTaskQueue(q1)
+            q1.displayQueue()
 
         if n==2:############# find task by id ################
             id=verifyId()
@@ -233,11 +259,24 @@ def displayMenu():
                 task.getTask().printTask()
         
         if n==3:######### complete high priority task ##############
-           st1.push(q1.dequeue()) 
-           tm1.setTaskHistory(st1)
-           print("\n Marking the highest priority task as completed and putting it in the task history successfully")
+           if not q1.isEmpty():   
+                st1.push(q1.dequeue()) 
+                tm1.setTaskHistory(st1)
+                print("Marking the highest priority task as completed and putting it in the task history successfully\n")
+           else:
+                print("no task to complete , please add task")
+ 
+        if n==4:######## display all task by priority order ########
+            printAlltask(tm1)
 
-            
+        if n==5:##########  display uncompleted task #########
+            q1.displayQueue()
+        
+        if n==6:##########  display last completed task #########
+            if st1.isEmpty():
+                print("empty stack")
+            else:
+                st1.getHead().getTask().printTask()
 
 ################## main ###########################
 
