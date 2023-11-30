@@ -49,17 +49,35 @@ class FamilyTree:
         else:
             print("Parent node not found")
 
+    ####################### sort birthday ###############################
+    def listBirthDate(self ,node:Node, listbirthdate:list):
+        if node is not None:
+            listbirthdate.append(node.bdate)
+            for child in node.children:
+                self.listBirthDate(child, listbirthdate)
+        return listbirthdate
+    
+    
+    def sortBirthdate(self,list1):
+        list1=self.listBirthDate(self.getRoot(),list1)
+        list1.sort(key=lambda date: datetime.strptime(date, "%d-%m-%Y"))
+        print(list1)
+       
 
+
+##### validate date ############
 def validDate(date):
     format = "%d-%m-%Y"
     while not datetime.strptime(date, format):
         date = input("Enter a valid date DD-MM-YYYY: ")
     return date
 
+################################ main #################################
+
 def main():
     p=Node("John","cina","1-10-1980")
     p1=Node("karim","smith","1-5-1988")
-    p2=Node("Mary","cina","1-10-1980")
+    p2=Node("Mary","cina","1-10-2003")
     p3=Node("bob","omeysh","4-5-1994")
 
     cina=FamilyTree(p)
@@ -67,4 +85,6 @@ def main():
     cina.addChild(p,p2)
     cina.addChild(p2,p3)
     print(cina.search(p3,p1).__str__())
+    list1=[]
+    cina.sortBirthdate(list1)
 main()
