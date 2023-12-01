@@ -108,30 +108,64 @@ def printRelation(parent:Node ,searched_person:Node,family:FamilyTree):
 
 ################# count name ###########################     
 
-def countNames(name,family:FamilyTree):
-    root=family.getRoot()
+def countNames(name,root:Node,counter):
+    if root.name==name:
+        return counter+1
+    for child in root.children:
+        countername=countNames(name,child,counter+1)
+        if countername>0:
+            return countername
+    return 0
+
+################# menu #######################
+def menu():
+    print("1. Add child")
+    print("2. Sort by birthday")
+    print("3. Print relation")
+    print("4. Count name")
+    print("5. Exit")
+    print("Enter your choice: ")
+    return int(input())
     
 
 ################################ main #################################
 
 def main():
-    p=Node("John","cina","1-10-1980")
-    p1=Node("karim","smith","1-5-1988")
-    p2=Node("Mary","cina","1-10-2003")
-    p3=Node("bob","omeysh","4-5-1994")
-    p4=Node("omar","omeysh","6-8-2007")
-    p5=Node("abed","omeysh","20-8-2005")
-    cina=FamilyTree(p)
-    cina.addChild(p,p1)
-    cina.addChild(p,p2)
-    cina.addChild(p,p3)
-    cina.addChild(p3,p4)
-    cina.addChild(p1,p5)
-    print(cina.search(p3,p4).__str__())
-    list1=[]
-    cina.sortBirthdate(list1)
-    printRelation(p,p5,cina)
-    pt = PrettyPrintTree(lambda x: x.children, lambda x: f"{x.name} {x.fname} {x.bdate}")
-    pt(cina.getRoot())
+    n=0
+    print("first we need to add the first member of the family")
+    name=input("Enter the name: ")
+    fname=input("Enter the family name: ")
+    bdate=validDate(input("Enter the birthday: "))
+    p=Node(name,fname,bdate)
+    family=FamilyTree(p)
+    while n<5:
+        n=menu()
+        if n==1:
+            name=input("Enter the name: ")
+            fname=input("Enter the family name: ")
+            bdate=validDate(input("Enter the birthday: "))
+            p=Node(name,fname,bdate)
+            family.addChild(p)
+            
+            
 
+    # p=Node("John","cina","1-10-1980")
+    # p1=Node("karim","smith","1-5-1988")
+    # p2=Node("karim","cina","1-10-2003")
+    # p3=Node("bob","omeysh","4-5-1994")
+    # p4=Node("bob","omeysh","6-8-2007")
+    # p5=Node("bob","omeysh","20-8-2005")
+    # cina=FamilyTree(p)
+    # cina.addChild(p,p1)
+    # cina.addChild(p,p2)
+    # cina.addChild(p,p3)
+    # cina.addChild(p3,p4)
+    # cina.addChild(p1,p5)
+    # print(cina.search(p3,p4).__str__())
+    # list1=[]
+    # cina.sortBirthdate(list1)
+    # printRelation(p,p5,cina)
+    # pt = PrettyPrintTree(lambda x: x.children, lambda x: f"{x.name} {x.fname} {x.bdate}")
+    # pt(cina.getRoot())
+    # print(countNames("karim", cina.getRoot(),0))
 main()
