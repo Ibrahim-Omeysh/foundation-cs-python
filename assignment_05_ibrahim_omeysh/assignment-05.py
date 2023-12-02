@@ -146,6 +146,13 @@ def main():
             bdate=validDate(input("Enter the birthday: "))
             p=Node(name,fname,bdate)
             family.addChild(p)
+        if n==2:
+            list1=[]
+            family.sortBirthdate(list1)
+            print(list1)
+
+
+
             
             
 
