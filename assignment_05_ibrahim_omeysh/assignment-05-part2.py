@@ -37,10 +37,22 @@ class Platform:
             print(f"{deleted_user.username} deleted successfully")
         else:
             print("User does not exist")
+        
+    def removeRelation(self,username1,username2):
+        user1= self.users[username1]
+        user2=self.users[username2]
+        if user1 in user2.friends and user2 in user1.friends:
+            user2.friends.remove(user1)
+            user1.friends.remove(user2)
+            print(f"{user1.username} and {user2.username} are no more friends")
+        else:
+            print(f"{user1.username} and {user2.username} are not friends")
+
+
 
 
         
-    def addRelation(self, user1:User,user2:User):
+    def addRelation(self, user1,user2):
         if user1 in user2.friends or user2 in user1.friends :
             print(f"{user1.username} and {user2.username} are friends already")
         else:
@@ -67,9 +79,11 @@ def main():
     p.addRelation(u2,u3)
     p.addRelation(u4,u3)
     p.addRelation(u2,u1)
-    p.removeUser("omar")  
+    #p.removeUser("omar")  
     for i in u2.getFriend():
         print(i.username)
-    #p.printFriend()   
+    p.removeRelation("omar","ali")  
+    for i in u2.getFriend():
+        print(i.username)    
 
 main()
