@@ -79,7 +79,7 @@ def main():
     p.addRelation(u2,u3)
     p.addRelation(u4,u3)
     p.addRelation(u2,u1)
-    #p.removeUser("omar")  
+    #p.removeUser("md")  
     for i in u2.getFriend():
         print(i.username)
     p.removeRelation("omar","ali")  

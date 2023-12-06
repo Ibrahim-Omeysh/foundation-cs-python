@@ -31,16 +31,17 @@ def countDigit(number):
     ####### Find max ######
 def findMax(list1):
 
-        if list1 is None:
-            return 0
-        elif len(list1)==1:
-            return list1[0]
-        firstnumber=list1[0]
-        maxnumber=findMax(list1[1:])
-        if maxnumber is not None: 
-            return firstnumber if int(firstnumber)>int(maxnumber) else maxnumber
-        else:
-            return firstnumber
+    if list1 is None:
+        return 0
+    elif len(list1)==1:
+        return list1[0]
+    firstnumber=list1[0]
+    maxnumber=findMax(list1[1:])
+    if maxnumber is not None: 
+        return firstnumber if int(firstnumber)>int(maxnumber) else maxnumber
+    else:
+        return firstnumber
+        
         
     #######  insert matrix ######
 def insertmatrix(x,y):
