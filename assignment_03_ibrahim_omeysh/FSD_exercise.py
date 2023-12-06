@@ -134,20 +134,19 @@ def studentImprovment(dict1):
     list1=findInformation(dict1,"scores")
     list2=[]
     for i in range(len(list1)):
-        list3=sorted(list1[i])
-        counter=0
-        for j in range(3):
-            if  list3[j]==list1[i][j]:
-                if list3.count(list3[0])!= len(list3):
-                    counter+=1
-        if counter==3:
-            list2.append(i+1)       
+            if list1[i][0]<=list1[i][1] and list1[i][1]<=list1[i][2]:
+                list2.append(i+1)       
     return list2        
         
 
     
 def main():
-    classroom ={1:{"name" : "ibrahim" ,"age":"21",  "scores":(25,45,95)},
+    classroom ={1:{"name" : "ibrahim" ,"age":"22",  "scores":(30,70,95)},
+                2:{"name" : "ahmad" ,"age":"18",  "scores":(90,80,95)},
+                3:{"name" : "bob" ,"age":"30",  "scores":(60,45,30)},
+                4:{"name" : "ali" ,"age":"25",  "scores":(70,70,80)},
+                5:{"name" : "bob" ,"age":"19",  "scores":(90,60,90)},
+
                
                }
     n=0      
