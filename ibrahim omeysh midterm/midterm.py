@@ -2,7 +2,7 @@ import requests
 import validators
 import json
 import os
-
+import pathlib
 ######-----task1: open tab------########## 
    
     ###### First check input url ########
