@@ -17,6 +17,16 @@ class Linkedlist:
             new_node.next=self.head
             self.head=new_node
 
+    def searchExisting(self,name):
+        current=self.head
+        while current !=None:
+            if current.data==name:
+                return True
+            else:
+                current=current.next
+                return False
+        
+
     # def insertAtIndex(self,data,index):
     #     new_node=Node(data)
     #     pos=0
@@ -66,7 +76,7 @@ class Linkedlist:
     def printConnected(self):
         current = self.head
         while current is not None:
-            print(current.data)
+            print(current.data,end=" --> ")
             current = current.next
         if self.head is None:
             print("No friends connected.")
@@ -101,8 +111,11 @@ class Graph:
         s1=self.people.get(name1)
         s2=self.people.get(name2)
         if s1 is not None and s2 is not None:
-            self.platform[s1].connection.addFreind(name2)
-            self.platform[s2].connection.addFreind(name1)
+            if self.platform[s1].connection.searchExisting(name2):
+                print("Connection already established")
+            else:
+                self.platform[s1].connection.addFreind(name2)
+                self.platform[s2].connection.addFreind(name1)
 
     def printConnections(self):
         for user in self.platform:
@@ -121,5 +134,7 @@ def main():
     platform.addConnections("ali","bob")
     platform.addConnections("mona","bob")
     platform.addConnections("ahmad","bob")
+    platform.addConnections("ahmad","bob")
+
     platform.printConnections()
 main()
