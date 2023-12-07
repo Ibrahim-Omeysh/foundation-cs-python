@@ -55,23 +55,22 @@ class Linkedlist:
  
     #     current_node.next = new_node
 
-    def removeFriend(self,name):
+    def removeFreind(self,name):
         if self.head == None:
-            print("no freind found")
-        if self.head and self.head.data==name:
-            self.head=self.head.next
+            print("no freinds")
+        if self.head.next==None and self.head.data==name:
+            self.head=None
         else:
             current=self.head
             prev=None
-            while current :
-                if current.data!=name and current:
+            while current.next != None:
+                if current.data!=name:
                     prev=current
                     current=current.next
 
-                if current:
+                if current.data==name:
                     prev.next=current.next
-                else: 
-                    print(f"{name} not found in freinds")
+                    current.next=None
 
     def printConnected(self):
         current = self.head
@@ -79,7 +78,7 @@ class Linkedlist:
             print(current.data,end=" --> ")
             current = current.next
         if self.head is None:
-            print("No friends connected.")
+            print("No one")
 
 
 
@@ -116,6 +115,22 @@ class Graph:
             else:
                 self.platform[s1].connection.addFreind(name2)
                 self.platform[s2].connection.addFreind(name1)
+        else:
+            print("user not exist")
+
+    def deletConnection(self, name1, name2):
+        s1 = self.people.get(name1)
+        s2 = self.people.get(name2)
+
+        if s1 is not None and s2 is not None:
+            if self.platform[s1].connection.searchExisting(name2):
+                self.platform[s1].connection.removeFreind(name2)
+                self.platform[s2].connection.removeFreind(name1)
+            else:
+                print("Could not find connection")
+        else:
+            print("User not exist")
+
 
     def printConnections(self):
         for user in self.platform:
@@ -134,7 +149,8 @@ def main():
     platform.addConnections("ali","bob")
     platform.addConnections("mona","bob")
     platform.addConnections("ahmad","bob")
-    platform.addConnections("ahmad","bob")
-
+    platform.printConnections()
+    print("--------------------------------\n")
+    platform.deletConnection("ali","bob")
     platform.printConnections()
 main()
