@@ -61,9 +61,9 @@ class Platform:
             print(f"{user1.username} and {user2.username} are frinds now")
 
     def printFriend(self):
-        for user in self.users:
-            for friend in self.users[user].friends:
-                print(f"{self.users[user].username} and {self.users[friend].username} are friends")
+        for user in self.users.values():
+            for i in user.getFriend():
+                print(i.username,end="--->")
 
 
 
@@ -79,7 +79,8 @@ def main():
     p.addRelation(u2,u3)
     p.addRelation(u4,u3)
     p.addRelation(u2,u1)
-    #p.removeUser("md")  
+    p.printFriend()
+    print("================================")
     for i in u2.getFriend():
         print(i.username)
     p.removeRelation("omar","ali")  

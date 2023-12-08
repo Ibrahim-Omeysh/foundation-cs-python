@@ -43,17 +43,19 @@ class FamilyTree:
             found_child=self.search(searched_person ,child)
             if found_child is not None:
                 return found_child
+            else:
+                f"not found"
 
     ################ add child ####################
 
     def addChild(self, parent_node, child_node:Node):
         parent_node = self.search(parent_node,self.__root)
-        if parent_node is not None:
+        if parent_node is not None and child_node not in parent_node.children:
             parent_node.addChild(child_node)
             child_node.parent=parent_node
             print("Child added successfully")
         else:
-            print("Parent node not found")
+            print("child already exists")
 
     ####################### sort birthday ###############################
     def listBirthDate(self ,node:Node, listbirthdate:list):
@@ -150,17 +152,18 @@ def main():
 #             list1=[]
 #             family.sortBirthdate(list1)
 #             print(list1)
-    p=Node("John","cina","1-10-1980")
-    p1=Node("karim","smith","1-5-1988")
-    p2=Node("karim","cina","1-10-2003")
-    p3=Node("bob","omeysh","4-5-1994")
-    p4=Node("bob","omeysh","6-8-2007")
-    p6=Node("bob","omeysh","20-8-2005")
-    p7=Node("bob","omeysh","20-8-2005")
-    p8=Node("bob","omeysh","20-8-2005")
-    p9=Node("bob","omeysh","20-8-2005")
-    p10=Node("bob","omeysh","20-8-2005")
-    p11=Node("bob","omeysh","20-8-2005")
+    p=Node("John","omeysh","1-10-1980")
+    print(p.__str__())
+    p1=Node("karim","omeysh","1-5-1988")
+    p2=Node("ibrahim","omeysh","1-10-2000")
+    p3=Node("ali","omeysh","4-5-1994")
+    p4=Node("ahmad","omeysh","6-8-2007")
+    p6=Node("omar","omeysh","5-8-2010")
+    p7=Node("karim","omeysh","20-8-2011")
+    p8=Node("nader","omeysh","20-9-2012")
+    p9=Node("fadi","omeysh","5-8-2013")
+    p10=Node("ousama","omeysh","11-8-2014")
+    p11=Node("husein","omeysh","13-4-2015")
 
     cina=FamilyTree(p)
     cina.addChild(p,p1)
@@ -173,11 +176,15 @@ def main():
     cina.addChild(p8,p9)
     cina.addChild(p9,p10)
     cina.addChild(p9,p11)
-    print(cina.search(p3,p4).__str__())
-    list1=[]
-    cina.sortBirthdate(list1)
-    printRelation(p,p10,cina)
-    pt = PrettyPrintTree(lambda x: x.children, lambda x: f"{x.name} {x.fname} {x.bdate}")
-    pt(cina.getRoot())
-    print(countNames("karim", cina.getRoot(),0))
+    cina.addChild(p9,p11)
+    print(cina.search(p4,p3))
+    print(cina.search(p9,p8))
+    print(cina.search(p2,p9))
+
+    # list1=[]
+    # cina.sortBirthdate(list1)
+    # printRelation(p,p10,cina)
+    # pt = PrettyPrintTree(lambda x: x.children, lambda x: f"{x.name} {x.fname} {x.bdate}")
+    # pt(cina.getRoot())
+    # print(countNames("karim", cina.getRoot(),0))
 main()
